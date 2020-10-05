@@ -44,9 +44,9 @@ jobs:
       
       -   name: debugging 3
           run: |
-            apt update &&
-            apt install -y curl &&
-            curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
+            docker exec -it data-access-restrictor_rate-limiter_1 apt update &&
+            docker exec -it data-access-restrictor_rate-limiter_1 apt install -y curl &&
+            docker exec -it data-access-restrictor_rate-limiter_1 curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
       
       -   name: debugging 1
           run: docker exec -it data-access-restrictor_rate-limiter_1 ls /config
