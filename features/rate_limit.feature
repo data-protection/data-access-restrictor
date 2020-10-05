@@ -5,7 +5,7 @@ Feature: Rate Limit
   so that I can be sure data gets not profiled up.
 
   Scenario Outline: Usage
-    Given /foo is set to be just allowed to be called once <time unit>
+    Given /foo is set to be just allowed to be called once per <time unit>
     And I requested foo
     When I request foo
     Then it fails with 429
@@ -16,13 +16,13 @@ Feature: Rate Limit
 
     Examples: Supported Time Units
       | time unit | reset time |
-      | a day     | 216000     |
+      | day       | 216000     |
+      | hour      | 3600       |
+      | minute    | 60         |
+      | second    | 1          |
 
-  #| an hour   | 3600       |
-  #| a minute  | 60         |
-  #| a second  | 1          |
   Scenario: List
-    Given /foo is set to be just allowed to be called once a minute
+    Given /foo is set to be just allowed to be called once per minute
     When I request the list of rate limits
     Then I get
       | uri | rate limit |
