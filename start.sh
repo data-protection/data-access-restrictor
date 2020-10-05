@@ -7,4 +7,4 @@ echo '{}' > build/config/rate_limited_uris.json
 mkdir -p build/state
 echo '{}' > build/state/last_access.json
 
-docker-compose up --build
+COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up --build "$@"

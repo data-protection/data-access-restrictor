@@ -28,7 +28,7 @@ jobs:
       -   uses: actions/checkout@v2
 
       -   name: Start the test environment
-          run: ./start.sh --build --detach
+          run: ./start.sh --detach
 
       -   name: Ensure services up and ready
           run: bin/ensure_service_ready
