@@ -35,8 +35,8 @@ jobs:
 
       -   name: Debug
           run: |
-            ls -l / &&
-            ls -l /config
+            ls -l build &&
+            ls -l build/config
 
       -   name: Run feature tests
           run: ./dev bin/test
