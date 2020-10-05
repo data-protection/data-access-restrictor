@@ -21,9 +21,6 @@ jobs:
       -   name: Run unit tests
           run: bin/unittest
 
-      -   name: Run feature tests
-          run: bin/test
-
   feature-test:
     name: Feature test
     runs-on: ubuntu-latest
@@ -31,7 +28,7 @@ jobs:
       -   uses: actions/checkout@v2
 
       -   name: Start the test environment
-          run: start.sh --build --detach
+          run: ./start.sh --build --detach
 
       -   name: Ensure services up and ready
           run: bin/ensure_service_ready
