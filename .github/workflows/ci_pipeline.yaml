@@ -35,6 +35,12 @@ jobs:
       
       -   name: docker ps
           run: docker ps
+      
+      -   name: some curl
+          run: curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
+      
+      -   name: some python request
+          run: python3 -c "import requests; requests.put('http://localhost:8081/rate_limit/P1DT0H0M0S/blub').ok);""
 
       -   name: Run feature tests
           run: ./dev bin/test
