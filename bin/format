@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+options=""
+if [ -t 0 ]; then
+  options="${options} --tty"
+fi
+
+# just check?
+black_options=''
+if [ ! -z ${check+x} ]; then
+  black_options="--check"
+fi
+
+find . -name '*.lua' -exec docker run -v $PWD:/tmp birdy/docker-luaformatter -a {} +
+docker run --rm -v $(pwd):/data -w /data cytopia/black \
+  features/*.py \
+  features/*/*.py \
+  features/*/*/*.py \
+  ${black_options} \
+  --skip-string-normalization \
+  --target-version py38
+
+ls -1 features/*.feature | xargs -I {} docker run -v $(pwd):/work gherkin/format --replace /work/{} --verbose
