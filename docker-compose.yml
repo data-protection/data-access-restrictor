@@ -3,7 +3,7 @@ services:
   rate-limiter:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: access-restrictor/Dockerfile
     restart: on-failure
     ports:
       - 8080:8080

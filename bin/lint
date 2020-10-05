@@ -14,17 +14,17 @@ function dockerlint {
 
 docker run -i --rm -v $(pwd):/lua mikeyyuen/luacheck luacheck \
   --codes \
-  lua/ \
+  access-restrictor/lua/ \
   --ignore 111 \
   --ignore 112 \
   --ignore 113 \
   --ignore 143 \
   --ignore 212 \
   --quiet
-docker run --net=none ${options} -i --rm -v $(pwd):/apps alpine/flake8:3.5.0 --ignore=B901,D100,D101,D102,D103,D104,D107,E501,E722,I201 billing/ features/
+docker run --net=none ${options} -i --rm -v $(pwd):/apps alpine/flake8:3.5.0 --ignore=B901,D100,D101,D102,D103,D104,D107,E501,E722,I201 features/
 ./dev pylint features/
 docker run --net=none -v $(pwd):/work gherkin/lint --disable TooManyDifferentTags,TooManyTags '/work/features/*.feature'
 find features -name '*.feature' | xargs -I {} docker run -v $(pwd):/work gherkin/language /work/{}
 
-dockerlint Dockerfile.dev
+dockerlint bin/Dockerfile.dev
 dockerlint Dockerfile
