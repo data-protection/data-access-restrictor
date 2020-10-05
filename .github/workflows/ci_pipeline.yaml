@@ -6,8 +6,8 @@ on:
       - '**.md'
 
 jobs:
-  build:
-    name: CI pipeline
+  unit-test:
+    name: Code Analysis and Unittest
     runs-on: ubuntu-latest
     steps:
       -   uses: actions/checkout@v2
@@ -23,3 +23,18 @@ jobs:
 
       -   name: Run feature tests
           run: bin/test
+
+  feature-test:
+    name: Feature test
+    runs-on: ubuntu-latest
+    steps:
+      -   uses: actions/checkout@v2
+
+      -   name: Start the test environment
+          run: start.sh --build --detach
+
+      -   name: Ensure services up and ready
+          run: bin/ensure_service_ready
+
+      -   name: Run feature tests
+          run: ./dev bin/test

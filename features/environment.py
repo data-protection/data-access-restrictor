@@ -6,7 +6,7 @@ def before_scenario(context, _):
     from datetime import timedelta
 
     empty_config()
-    context.sut.start(timeout=timedelta(minutes=10))
+    #context.sut.start(timeout=timedelta(minutes=10))
     import time
 
     time.sleep(5)  # TODO: remove
@@ -14,7 +14,7 @@ def before_scenario(context, _):
 
 def before_all(context):
     empty_config()
-    context.sut = SUT(['docker-compose', 'up', '--build'])
+    context.sut = SUT([])
     import atexit
 
     def cleanup():
