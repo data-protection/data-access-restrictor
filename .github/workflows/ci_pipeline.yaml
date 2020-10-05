@@ -41,6 +41,18 @@ jobs:
 
       -   name: some curl 2
           run: curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
+      
+      -   name: debugging 3
+          run: |
+            apt update &&
+            apt install -y curl &&
+            curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
+      
+      -   name: debugging 1
+          run: docker exec -it data-access-restrictor_rate-limiter_1 ls /config
+      
+      -   name: debugging 2
+          run: docker exec -it data-access-restrictor_rate-limiter_1 more /config/rate_limited_uris.json
 
       -   name: Run feature tests
           run: ./dev bin/test
