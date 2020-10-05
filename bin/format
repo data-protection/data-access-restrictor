@@ -12,7 +12,7 @@ if [ ! -z ${check+x} ]; then
   black_options="--check"
 fi
 
-find . -name '*.lua' -exec docker run -v $PWD:/tmp birdy/docker-luaformatter -a {} +
+find . -name 'access-restrictor/*.lua' -exec docker run -v $PWD:/tmp birdy/docker-luaformatter -a {} +
 docker run --rm -v $(pwd):/data -w /data cytopia/black \
   features/*.py \
   features/*/*.py \
