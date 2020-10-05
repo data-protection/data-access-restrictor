@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+options=""
+if [ -t 0 ]; then
+  options="${options}"
+fi
+
+function dockerlint {
+  file=${1}
+  echo -n "checking ${file} ... "
+  docker run --rm -i hadolint/hadolint hadolint --ignore DL3013 --ignore SC2035 --ignore DL3007 - < "${file}"
+}
+
+docker run -i --rm -v $(pwd):/lua mikeyyuen/luacheck luacheck \
+  --codes \
+  lua/ \
+  --ignore 111 \
+  --ignore 112 \
+  --ignore 113 \
+  --ignore 143 \
+  --ignore 212 \
+  --quiet
+docker run --net=none ${options} -i --rm -v $(pwd):/apps alpine/flake8:3.5.0 --ignore=B901,D100,D101,D102,D103,D104,D107,E501,E722,I201 billing/ features/
+./dev pylint features/
+docker run --net=none -v $(pwd):/work gherkin/lint --disable TooManyDifferentTags,TooManyTags '/work/features/*.feature'
+find features -name '*.feature' | xargs -I {} docker run -v $(pwd):/work gherkin/language /work/{}
+
+dockerlint Dockerfile.dev
+dockerlint Dockerfile
