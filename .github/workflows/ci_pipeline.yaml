@@ -32,32 +32,11 @@ jobs:
 
       -   name: Ensure services up and ready
           run: bin/ensure_service_ready
-      
-      -   name: docker ps
-          run: docker ps
 
-      -   name: some curl 1
-          run: curl -v -X GET http://localhost:8081/rate_limit/bla
-
-      -   name: some curl 2
-          run: curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
-
-      -   name: debugging 4
+      -   name: Debug
           run: |
-            docker exec -i data-access-restrictor_rate-limiter_1 ls -l / &&
-            docker exec -i data-access-restrictor_rate-limiter_1 ls -l /config
-
-      -   name: debugging 3
-          run: |
-            docker exec -i data-access-restrictor_rate-limiter_1 apt update &&
-            docker exec -i data-access-restrictor_rate-limiter_1 apt install -y curl &&
-            docker exec -i data-access-restrictor_rate-limiter_1 curl -v -X PUT http://localhost:8081/rate_limit/P1DT0H0M0S/bla
-      
-      -   name: debugging 1
-          run: docker exec -i data-access-restrictor_rate-limiter_1 ls /config
-      
-      -   name: debugging 2
-          run: docker exec -i data-access-restrictor_rate-limiter_1 more /config/rate_limited_uris.json
+            ls -l / &&
+            ls -l /config
 
       -   name: Run feature tests
           run: ./dev bin/test
