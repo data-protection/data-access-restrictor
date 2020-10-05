@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  rate-limiter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8080:8080
+      - 8081:8081
+    volumes:
+      - type: bind
+        source: ./build/state
+        target: /state
+      - type: bind
+        source: ./build/config
+        target: /config
+
+  target:
+    image: rodolpheche/wiremock
+    ports:
+      - 8082:8080
+    stop_grace_period: 1s
