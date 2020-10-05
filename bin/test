@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PYTHONPATH=features/support behave --stop $*
