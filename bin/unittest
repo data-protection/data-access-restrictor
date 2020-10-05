@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+./dev python3 -m doctest features/*.py features/*/*.py
+docker run --rm -v $(pwd)/lua/src:/src -v $(pwd)/lua/spec:/spec vpanov/lua-busted busted
