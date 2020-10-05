@@ -33,10 +33,5 @@ jobs:
       -   name: Ensure services up and ready
           run: bin/ensure_service_ready
 
-      -   name: Debug
-          run: |
-            ls -l build &&
-            ls -l build/config
-
       -   name: Run feature tests
           run: ./dev bin/test
