@@ -45,7 +45,7 @@ jobs:
       -   name: debugging 4
           run: |
             docker exec -i data-access-restrictor_rate-limiter_1 ls -l / &&
-            docker exec -i data-access-restrictor_rate-limiter_1 ls -l /config &&
+            docker exec -i data-access-restrictor_rate-limiter_1 ls -l /config
 
       -   name: debugging 3
           run: |
