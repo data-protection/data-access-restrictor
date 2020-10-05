@@ -17,10 +17,10 @@ Feature: Rate Limit
     Examples: Supported Time Units
       | time unit | reset time |
       | a day     | 216000     |
-      #| an hour   | 3600       |
-      #| a minute  | 60         |
-      #| a second  | 1          |
 
+  #| an hour   | 3600       |
+  #| a minute  | 60         |
+  #| a second  | 1          |
   Scenario: List
     Given /foo is set to be just allowed to be called once a minute
     When I request the list of rate limits
