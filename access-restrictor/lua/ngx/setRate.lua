@@ -1,13 +1,6 @@
-function parse_duration(input)
-  -- XXX: make parts optional
-  days, hours, minutes, seconds = string.match(input, "^P(%d*)DT(%d*)H(%d*)M(%d*)S$")
-  assert(days or hours or minutes or seconds)
-
-  return tonumber(days) or 0,tonumber(hours) or 0, tonumber(minutes) or 0, tonumber(seconds) or 0
-end
-
 if ngx.var.request_method == "PUT" then
-  days, hours, minutes, seconds = parse_duration(ngx.var.rate)
+  local duration = require("duration")
+  days, hours, minutes, seconds = duration:parse(ngx.var.rate)
 
   local rate = (((days * 60 + hours) * 60) + minutes) * 60 + seconds
   if (rate == nil) or (rate <= 0) then
