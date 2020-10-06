@@ -1,16 +1,11 @@
 #!/bin/bash
 
-options=""
-if [ -t 0 ]; then
-  options="${options}"
-fi
-
 docker build --tag test --quiet --file bin/Dockerfile.dev . &> /dev/null &&
-docker run --rm${options} -i \
+docker run --rm -i \
   --net=host \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(which docker):/bin/docker \
-  -v $(pwd):$(pwd) \
+  -v ${HOME}:${HOME} \
   -w $(pwd) \
   -e HOME \
   -e PYTHONPATH=$(pwd)/features/:$(pwd)/features/support/ \

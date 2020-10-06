@@ -1,0 +1,37 @@
+name: CI pipeline
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  unit-test:
+    name: Code Analysis and Unittest
+    runs-on: ubuntu-latest
+    steps:
+      -   uses: actions/checkout@v2
+
+      -   name: Check Format
+          run: bin/format
+
+      -   name: Check Lint
+          run: bin/lint
+
+      -   name: Run unit tests
+          run: bin/unittest
+
+  feature-test:
+    name: Feature test
+    runs-on: ubuntu-latest
+    steps:
+      -   uses: actions/checkout@v2
+
+      -   name: Start the test environment
+          run: ./start.sh --detach
+
+      -   name: Ensure services up and ready
+          run: bin/ensure_service_ready
+
+      -   name: Run feature tests
+          run: ./dev bin/test

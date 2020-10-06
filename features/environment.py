@@ -14,7 +14,7 @@ def before_scenario(context, _):
 
 def before_all(context):
     empty_config()
-    context.sut = SUT(['docker-compose', 'up', '--build'])
+    context.sut = SUT(['./start.sh'])
     import atexit
 
     def cleanup():

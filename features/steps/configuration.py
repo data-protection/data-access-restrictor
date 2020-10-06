@@ -2,7 +2,7 @@ from behave import given, when
 import requests
 
 
-@given(u'/{uri} is set to be just allowed to be called once a {time_unit}')
+@given(u'/{uri} is set to be just allowed to be called once per {time_unit}')
 def rate_limit_by_minutes(context, uri, time_unit):
     requests.post(
         'http://localhost:8082/__admin/mappings/',

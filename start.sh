@@ -4,7 +4,9 @@ set -e
 
 mkdir -p build/config
 echo '{}' > build/config/rate_limited_uris.json
+chmod -R a+w build/config
 mkdir -p build/state
 echo '{}' > build/state/last_access.json
+chmod -R a+w build/state
 
-docker-compose up --build
+COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up --build "$@"
