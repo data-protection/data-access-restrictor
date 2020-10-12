@@ -10,12 +10,11 @@ Feature: Rate Limit
     And I waited <wait> hours
     When I request foo
     Then it <result>
-  
-  Examples: 
-    | wait | result |
-    | 23   | fails with 429    |
-    | 25   | succeeds with 200 |
 
+    Examples:
+      | wait | result            |
+      | 23   | fails with 429    |
+      | 25   | succeeds with 200 |
 
   Scenario Outline: Usage Header
     Given /foo is set to be just allowed to be called once per <time unit>

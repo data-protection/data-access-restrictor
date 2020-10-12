@@ -1,6 +1,5 @@
 from behave import given, when
 import requests
-from util.test.faketime import Faketime
 
 
 @given(u'/{uri} is set to be just allowed to be called every {hours:d} hours')
@@ -27,9 +26,7 @@ def set_rate_limit(context, uri, duration):
             "response": {"status": 200},
         },
     )
-    assert requests.put(
-        f'http://localhost:8081/rate_limit/{duration}/{uri}'
-    ).ok
+    assert requests.put(f'http://localhost:8081/rate_limit/{duration}/{uri}').ok
 
 
 @when(u'I request the list of rate limits')
