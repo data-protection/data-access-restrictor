@@ -8,5 +8,6 @@ chmod -R a+w build/config
 mkdir -p build/state
 echo '{}' > build/state/last_access.json
 chmod -R a+w build/state
+touch build/faketime
 
 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose up --build "$@"

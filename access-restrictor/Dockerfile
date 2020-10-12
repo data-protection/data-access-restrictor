@@ -3,6 +3,8 @@ FROM openresty/openresty:1.15.8.3-buster
 EXPOSE 8080/tcp
 EXPOSE 8081/tcp
 
+RUN apt-get update && apt-get install -y faketime
+
 COPY access-restrictor/lua/ /lua
 RUN \
   mkdir -p /config && \
@@ -10,9 +12,6 @@ RUN \
   mkdir -p /state && \
   echo "{}" > /state/last_access.json
 COPY access-restrictor/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
-
-# TODO: VOLUME /config
-# TODO: VOLUME /state
 
 RUN chmod 777 -R /state /config
 

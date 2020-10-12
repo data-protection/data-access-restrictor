@@ -1,4 +1,5 @@
 import os
+from util.test.faketime import Faketime
 from util.test.sut import SUT
 
 
@@ -7,6 +8,7 @@ def before_scenario(context, _):
 
     empty_config()
     context.sut.start(timeout=timedelta(minutes=10))
+    context.time = Faketime()
     import time
 
     time.sleep(5)  # TODO: remove
@@ -49,3 +51,4 @@ def after_step(context, _):
 
 def after_scenario(context, _):
     context.sut.stop()
+    empty_config()

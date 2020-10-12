@@ -8,6 +8,10 @@ services:
     ports:
       - 8080:8080
       - 8081:8081
+    environment: 
+      - LD_PRELOAD=/usr/lib/x86_64-linux-gnu/faketime/libfaketimeMT.so.1
+      - FAKETIME_NO_CACHE=1
+      - FAKETIME_TIMESTAMP_FILE=/faketime
     volumes:
       - type: bind
         source: ./build/state
@@ -15,6 +19,10 @@ services:
       - type: bind
         source: ./build/config
         target: /config
+      - type: bind
+        source: ./build/faketime
+        target: /faketime
+        read_only: true
 
   target:
     image: rodolpheche/wiremock

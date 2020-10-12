@@ -5,6 +5,19 @@ Feature: Rate Limit
   so that I can be sure data gets not profiled up.
 
   Scenario Outline: Usage
+    Given /foo is set to be just allowed to be called every 24 hours
+    And I requested foo
+    And I waited <wait> hours
+    When I request foo
+    Then it <result>
+  
+  Examples: 
+    | wait | result |
+    | 23   | fails with 429    |
+    | 25   | succeeds with 200 |
+
+
+  Scenario Outline: Usage Header
     Given /foo is set to be just allowed to be called once per <time unit>
     And I requested foo
     When I request foo
