@@ -1,9 +1,7 @@
-FROM openresty/openresty:1.15.8.3-buster
+FROM openresty/openresty:1.17.8.2-5-alpine
 
 EXPOSE 8080/tcp
 EXPOSE 8081/tcp
-
-RUN apt-get update && apt-get install -y faketime
 
 COPY access-restrictor/lua/ /lua
 RUN \

@@ -22,7 +22,7 @@ Feature: Rate Limit
     When I request foo
     Then it fails with 429
       | header                | value                  |
-      | X-RateLimit           | Limit: 1               |
+      | X-RateLimit-Limit     | 1                      |
       | X-RateLimit-Remaining | 0                      |
       | X-RateLimit-Reset     | <reset time>.0 seconds |
 

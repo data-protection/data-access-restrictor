@@ -9,7 +9,7 @@ class Faketime:
         self.dump()
 
     def dump(self):
-        with open('build/faketime', 'w') as file:
+        with open('build/faketime/timestamp', 'w') as file:
             file.write(self.time.strftime('%Y-%m-%d %H:%M:%S'))
 
     def set_time(self, time):

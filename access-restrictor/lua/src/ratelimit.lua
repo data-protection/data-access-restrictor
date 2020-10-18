@@ -21,7 +21,7 @@ end
 
 function RateLimiter:reject(time_remaining)
   ngx.header["Content-Type"] = "text/plain"
-  ngx.header["X-RateLimit:Limit"] = "1" -- maximum requests per time period
+  ngx.header["X-RateLimit-Limit"] = "1" -- maximum requests per time period
   ngx.header["X-RateLimit-Remaining"] = "0"
   ngx.header["X-RateLimit-Reset"] = string.format("%.1f", time_remaining / 3600) .. " seconds"
   ngx.log(ngx.STDERR, "requested too often; request got rate limited")
