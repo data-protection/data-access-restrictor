@@ -18,6 +18,7 @@ def request(context, uri):
 
 
 @then('it fails with {response_code:d}')
+@then('it succeeds with {response_code:d}')
 def verify(context, response_code):
     if not context.table:
         return
